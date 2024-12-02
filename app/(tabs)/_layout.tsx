@@ -22,6 +22,7 @@ export default function TabLayout() {
   const hasFinishOnboarding = useUserStore(
     (state) => state.hasFinishedOnboarding
   );
+  // const hasFinishOnboarding = false;
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   if (!isLoggedIn) {
     if (!hasFinishOnboarding) {

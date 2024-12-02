@@ -65,6 +65,10 @@ function RootLayoutNav() {
           name="onboarding"
           options={{ headerShown: false, animation: "fade" }}
         />
+        <Stack.Screen
+          name="(auth)"
+          options={{ headerShown: false, animation: "fade" }}
+        />
       </Stack>
     </ThemeProvider>
   );

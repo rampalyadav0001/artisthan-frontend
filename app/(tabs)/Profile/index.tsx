@@ -4,13 +4,15 @@ import React from "react";
 import { Text, View } from "@/components/Themed";
 import { useRouter } from "expo-router";
 import { useUserStore } from "@/store/userStrore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function index() {
   const router = useRouter();
   const logout = useUserStore((state) => state.logout);
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     logout();
     router.replace("/(auth)/Login");
+    AsyncStorage.clear();
   };
 
   return (
