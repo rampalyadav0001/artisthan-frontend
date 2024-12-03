@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Text, View } from "@/components/Themed";
+import { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
-import { Button, TextInput, Alert, StyleSheet } from "react-native";
 import { useUserStore } from "@/store/userStrore";
-
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -11,25 +9,49 @@ const LoginScreen = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email || !password) {
       Alert.alert("Error", "Both email and password are required!");
       return;
     }
 
-    // Call your login logic here
-    login(); // Replace with actual authentication logic
-    router.replace("/");
+    setLoading(true);
+
+    try {
+      const response = await fetch("https://your-api-url.com/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        login(); // Assuming `login` saves user details
+        router.replace("/"); // Navigate to the main screen
+      } else {
+        Alert.alert("Login Failed", data.message || "Invalid email or password.");
+      }
+    } catch (error) {
+      Alert.alert("Error", "Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Welcome Back</Text>
+      <Text style={styles.subtitle}>Log in to your account</Text>
+
       <TextInput
         style={styles.input}
         placeholder="Email"
-        placeholderTextColor="#888"
+        placeholderTextColor="#aaa"
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
@@ -37,17 +59,24 @@ const LoginScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Password"
-        placeholderTextColor="#888"
+        placeholderTextColor="#aaa"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
-      <Button title="Login" onPress={handleLogin} />
-      <Button
-        title="Go to Register"
-        onPress={() => router.push("/Registration")}
-        color="gray"
-      />
+
+      {loading ? (
+        <ActivityIndicator size="large" color="#007BFF" style={styles.loader} />
+      ) : (
+        <>
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Log In</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.linkContainer} onPress={() => router.push("/Registration")}>
+            <Text style={styles.linkText}>Don't have an account? <Text style={styles.linkHighlight}>Register</Text></Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
@@ -55,26 +84,73 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff1c2",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#fff",
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "bold",
-    marginBottom: 20,
+    color: "#333",
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#555",
+    marginBottom: 30,
   },
   input: {
     width: "100%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 15,
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    padding: 15,
     fontSize: 16,
+    color: "#333",
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  button: {
+    width: "100%",
+    backgroundColor: "#E60B15",
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: "center",
+    marginVertical: 15,
+    shadowColor: "#007BFF",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 6,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "600",
+  },
+  linkContainer: {
+    marginTop: 15,
+  },
+  linkText: {
+    fontSize: 16,
+    color: "#666",
+  },
+  linkHighlight: {
+    color: "#007BFF",
+    fontWeight: "bold",
+  },
+  loader: {
+    marginTop: 20,
   },
 });
 
 export default LoginScreen;
+
+
 
