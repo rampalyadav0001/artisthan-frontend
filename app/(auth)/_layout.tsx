@@ -18,6 +18,13 @@ export default function Layout() {
           headerShown: true,
         }}
       />
+      <Stack.Screen
+        name="SelectInterests"
+        options={{
+          title: "Interests",
+          headerShown: true,
+        }}
+      />
     </Stack>
   );
 }
