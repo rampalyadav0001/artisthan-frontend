@@ -2,7 +2,6 @@ import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import { useRef, useState } from "react";
 import {
   Button,
-  Image,
   PixelRatio,
   StyleSheet,
   Text,
@@ -13,12 +12,15 @@ import {
 import { captureRef } from "react-native-view-shot";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
-const { height } = Dimensions.get("window");
+import TfModel from "@/helpers/ml/TensorlfowModel";
 
+const { height } = Dimensions.get("window");
 export default function ScanNFind() {
   const cameraRef = useRef(null);
+  const [predict, setPredict] = useState("");
+
+  // Camera Stuff & Permissions
   const [facing, setFacing] = useState<CameraType>("back"); // WHICH CAMERA TO USE
-  // Permission contains the status anD requestPermission is a function to request the permission.
   const [permission, requestPermission] = useCameraPermissions();
 
   if (!permission) {
@@ -46,15 +48,21 @@ export default function ScanNFind() {
   // pixels * pixelRatio = targetPixelCount, so pixels = targetPixelCount / pixelRatio
   const pixels = targetPixelCount / pixelRatio;
 
+  // onPress Event handler for clicking image photo
   const captureImage = async () => {
+    console.log("Capturing image...");
+    setPredict("");
     try {
       const result = await captureRef(cameraRef, {
         result: "tmpfile",
         height: pixels,
         width: pixels,
         quality: 1,
-        format: "png",
+        format: "jpg",
       });
+
+      const answer = await TfModel(result);
+      setPredict(answer);
 
       console.log("Captured image result:", result);
     } catch (error) {
@@ -63,20 +71,17 @@ export default function ScanNFind() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} ref={cameraRef}>
       <TouchableOpacity style={styles.backButton} onPress={router.back}>
         <AntDesign name="left" size={24} color="black" />
       </TouchableOpacity>
-      <CameraView
-        style={styles.camera}
-        facing={facing}
-        zoom={0}
-        ref={cameraRef}
-      ></CameraView>
+      <CameraView style={styles.camera} facing={facing} zoom={0}></CameraView>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={captureImage}>
           <AntDesign name="camera" size={48} color="black" />
         </TouchableOpacity>
+
+        {predict === "" ? <Text>....loading</Text> : <Text>{predict}</Text>}
       </View>
     </View>
   );
@@ -84,8 +89,8 @@ export default function ScanNFind() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "transparent",
+    // flex: 1,
+    backgroundColor: "black",
     position: "relative",
     // justifyContent: "center",
   },
@@ -108,22 +113,31 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   camera: {
-    // flex: 2,
+    // flex: 4,
     width: "100%",
-    height: height * 0.7,
+    height: height * 0.8,
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
   },
   buttonContainer: {
     // flex: 1,
-    flex: 1,
-    justifyContent: "flex-end",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+
+    // flex: 1,
+    height: height * 0.2,
+    // justifyContent: "flex-end",
     alignItems: "center",
     paddingBottom: 20,
+    backgroundColor: "white",
   },
   button: {
     flex: 1,
     // alignSelf: "flex-end",
-    borderRadius: 50,
-    borderColor: "black",
+    // borderRadius: 50,
+    // borderColor: "black",
     justifyContent: "center",
     alignItems: "center",
   },
