@@ -11,6 +11,13 @@ export default function Layout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="ScanNFind"
+        options={{
+          title: "Scan'n'Find",
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }
