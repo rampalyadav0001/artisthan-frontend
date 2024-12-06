@@ -22,7 +22,7 @@ export default function Layout() {
         name="SelectInterests"
         options={{
           title: "Interests",
-          headerShown: true,
+          headerShown: false,
         }}
       />
     </Stack>

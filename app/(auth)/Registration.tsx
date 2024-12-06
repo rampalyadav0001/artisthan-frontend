@@ -1,5 +1,6 @@
 import { useUserStore } from "@/store/userStrore";
 import { useRouter } from "expo-router";
+import { navigate } from "expo-router/build/global-state/routing";
 import React, { useState } from "react";
 import {
   View,
@@ -33,7 +34,7 @@ const Registration = () => {
 
     login();
     // Navigate to login or home screen
-    router.push("/SelectInterests");
+    router.replace("/SelectInterests");
   };
 
   return (
