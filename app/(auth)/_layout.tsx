@@ -8,14 +8,14 @@ export default function Layout() {
         name="Login"
         options={{
           title: "Login",
-          headerShown: true,
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name="Registration"
         options={{
           title: "Registration",
-          headerShown: true,
+          headerShown: false,
         }}
       />
       <Stack.Screen
