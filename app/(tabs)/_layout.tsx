@@ -1,6 +1,6 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Redirect, Tabs } from "expo-router";
+import { Link, Redirect, Tabs, useSegments } from "expo-router";
 
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
@@ -22,6 +22,9 @@ export default function TabLayout() {
   const hasFinishOnboarding = useUserStore(
     (state) => state.hasFinishedOnboarding
   );
+  const segment = useSegments();
+  const page = segment[segment.length - 1];
+  const pagesToHideTabBar = ["ScanNFind"];
   // const hasFinishOnboarding = false;
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   if (!isLoggedIn) {
@@ -39,6 +42,9 @@ export default function TabLayout() {
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: false,
+        tabBarStyle: {
+          display: pagesToHideTabBar.includes(page) ? "none" : "flex",
+        },
       }}
     >
       <Tabs.Screen
