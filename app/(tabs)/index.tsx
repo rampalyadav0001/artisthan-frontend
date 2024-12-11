@@ -1,4 +1,7 @@
+import { Products, TrendingProducts, artisans } from '@/data/productData';
+import { useUserStore } from '@/store/userStrore';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import {
   Image,
@@ -11,6 +14,22 @@ import {
 } from 'react-native';
 
 const HomePage = () => {
+  const router = useRouter();
+  const productId = useUserStore((state) => state.productId);
+  const setProductId = useUserStore((state) => state.setProductId);
+  const openProductsPage = (index: number) => {
+    setProductId(index);
+    router.push('/Search/ProductDetailPage');
+  };
+  const openTrendingProductsPage = (index: number) => {
+    setProductId(index);
+    router.push('/Search/TrendingProductDetails');
+  };
+  const openArtisianDetailsPage = (index: number) => {
+    setProductId(index);
+    router.push('/Search/ArtisianDetailsPage');
+  };
+
   return (
     <View style={styles.container}>
       {/* Sticky Header */}
@@ -41,52 +60,25 @@ const HomePage = () => {
           </TouchableOpacity>
         </View>
 
-        {/* Featured Products */}
-        <Text style={styles.sectionTitle}>Featured Products</Text>
+        {/*Artisian */}
+        <Text style={styles.sectionTitle}>Artisian</Text>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           style={styles.featuredProducts}
         >
-          {[
-            {
-              name: 'Handicrafts',
-              image:
-                'https://tse3.mm.bing.net/th?id=OIP.Q1ZqCSsxzRiboTVZu10p5wHaE8&pid=Api&P=0&h=180', // Example URL
-            },
-            {
-              name: 'Jewellery',
-              image:
-                'https://upload.wikimedia.org/wikipedia/commons/d/da/Gold-jewellery-jewel-henry-designs-terabass.jpg', // Example URL
-            },
-            {
-              name: 'clothings',
-              image:
-                'https://tse4.mm.bing.net/th?id=OIP.HRwXNobzmx8BvEDehfsVNwHaE8&pid=Api&P=0&h=180', // Example URL
-            },
-            {
-              name: 'Paintings',
-              image:
-                'http://1.bp.blogspot.com/-tQzkfgKTuc8/Ua0czIExNtI/AAAAAAAAAoc/bfNmSUN9NC4/s1600/000_3666.JPG', // Example URL
-            },
-            {
-              name: 'spritual offering',
-              image:
-                'https://tse1.mm.bing.net/th?id=OIP.VXSKb-iK-EC4W98Fxg6L2AHaEJ&pid=Api&P=0&h=180', // Example URL
-            },
-            {
-              name: 'wedding essentials',
-              image:
-                'https://c8.alamy.com/comp/JRRG1M/wedding-day-essentials-JRRG1M.jpg', // Example URL
-            },
-          ].map((item, index) => (
-            <View key={index} style={styles.categoryItem}>
+          {artisans.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.categoryItem}
+              onPress={() => openArtisianDetailsPage(index)}
+            >
               <Image
-                source={{ uri: item.image }} // Replace with category image
+                source={{ uri: item.image }}
                 style={styles.categoryImage}
               />
               <Text style={styles.categoryText}>{item.name}</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
 
@@ -119,28 +111,19 @@ const HomePage = () => {
             showsHorizontalScrollIndicator={false}
             style={styles.dealProducts}
           >
-            {[
-              {
-                name: 'Royal Rajasthani Necklace',
-                price: '₹500000',
-                image:
-                  'https://assets5.mirraw.com/images/66043/507641bb18099aa0c3cca1f6acf2cdc7_zoom.jpg?1364577730',
-              },
-              {
-                name: 'Kanjivaram Saree',
-                price: '₹2499',
-                image:
-                  'https://sp.yimg.com/ib/th?id=OIP.vFj8FO6x97B6rakaDfgYHgHaDS&pid=Api&w=148&h=148&c=7&dpr=2&rs=1',
-              },
-            ].map((item, index) => (
-              <View key={index} style={styles.productCard}>
+            {Products.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.productCard}
+                onPress={() => openProductsPage(index)}
+              >
                 <Image
                   source={{ uri: item.image }}
                   style={styles.productImage}
                 />
                 <Text style={styles.productName}>{item.name}</Text>
                 <Text style={styles.productPrice}>{item.price}</Text>
-              </View>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
@@ -158,27 +141,12 @@ const HomePage = () => {
             showsHorizontalScrollIndicator={false}
             style={styles.trendingProducts}
           >
-            {[
-              {
-                name: 'Jwellery',
-                price: '₹650',
-                oldPrice: '₹1599',
-                image: 'https://via.placeholder.com/120',
-              },
-              {
-                name: 'Labbin White Sneakers',
-                price: '₹650',
-                oldPrice: '₹1250',
-                image: 'https://via.placeholder.com/120',
-              },
-              {
-                name: 'Mammoth Handicrafts',
-                price: '₹750',
-                oldPrice: '₹1999',
-                image: 'https://via.placeholder.com/120',
-              },
-            ].map((item, index) => (
-              <View key={index} style={styles.productCard}>
+            {TrendingProducts.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.productCard}
+                onPress={() => openTrendingProductsPage(index)}
+              >
                 <Image
                   source={{ uri: item.image }}
                   style={styles.productImage}
@@ -190,7 +158,7 @@ const HomePage = () => {
                     style={styles.oldPrice}
                   >{`(${item.oldPrice} off)`}</Text>
                 </Text>
-              </View>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
@@ -215,7 +183,7 @@ const HomePage = () => {
         {/* Hot Deals */}
         <View style={styles.hotDeals}>
           <Image
-            source={{ uri: 'https://via.placeholder.com/300x150' }} // Replace with Hot Deals Image
+            source={{ uri: 'https://tse3.mm.bing.net/th?id=OIP.x5I2H2ZxyWcsHGmpxn9jFwHaE8&pid=Api&P=0&h=180' }} // Replace with Hot Deals Image
             style={styles.hotDealsImage}
           />
         </View>
@@ -355,6 +323,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     marginRight: 10,
+    marginBottom: 10,
     padding: 10,
     alignItems: 'center',
     shadowColor: '#000',
@@ -362,6 +331,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
     elevation: 3,
+
   },
   productImage: {
     width: 200,

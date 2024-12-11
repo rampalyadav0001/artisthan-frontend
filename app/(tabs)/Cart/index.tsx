@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import React from 'react';
 
+
 export default function index() {
   return (
     <View style={styles.container}>
@@ -12,6 +13,7 @@ export default function index() {
         lightColor='#eee'
         darkColor='rgba(255,255,255,0.1)'
       />
+      
     </View>
   );
 }
