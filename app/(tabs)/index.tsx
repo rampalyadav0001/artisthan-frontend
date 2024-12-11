@@ -93,7 +93,9 @@ const HomePage = () => {
         {/* Banner */}
         <View style={styles.banner}>
           <Image
-            source={{ uri: 'https://via.placeholder.com/300x150' }} // Replace with banner image
+            source={{
+              uri: 'https://s7d1.scene7.com/is/image/canon/5-home-decor-items-you-didnt-know-you-could-make-with-paper?wid=1000&hei=667&fmt=webp-alpha',
+            }} // Replace with banner image
             style={styles.bannerImage}
           />
           <Text style={styles.bannerText}>50% OFF</Text>
@@ -103,7 +105,7 @@ const HomePage = () => {
           </TouchableOpacity>
         </View>
 
-        {/* Deal of the Day */}
+        {/* Recommended Products */}
         <View style={styles.dealSection}>
           <View style={styles.dealHeader}>
             <Text style={styles.dealTitle}>Recommended Products</Text>
@@ -121,12 +123,14 @@ const HomePage = () => {
               {
                 name: 'Royal Rajasthani Necklace',
                 price: '₹500000',
-                image: 'https://via.placeholder.com/120',
+                image:
+                  'https://assets5.mirraw.com/images/66043/507641bb18099aa0c3cca1f6acf2cdc7_zoom.jpg?1364577730',
               },
               {
                 name: 'Kanjivaram Saree',
                 price: '₹2499',
-                image: 'https://via.placeholder.com/120',
+                image:
+                  'https://sp.yimg.com/ib/th?id=OIP.vFj8FO6x97B6rakaDfgYHgHaDS&pid=Api&w=148&h=148&c=7&dpr=2&rs=1',
               },
             ].map((item, index) => (
               <View key={index} style={styles.productCard}>
@@ -145,7 +149,6 @@ const HomePage = () => {
         <View style={styles.trendingSection}>
           <View style={styles.trendingHeader}>
             <Text style={styles.trendingTitle}>Trending Products</Text>
-            <Text style={styles.trendingDate}>Last Date 29/02/22</Text>
             <TouchableOpacity>
               <Text style={styles.viewAll}>View all</Text>
             </TouchableOpacity>
@@ -157,7 +160,7 @@ const HomePage = () => {
           >
             {[
               {
-                name: "IWC Schaffhausen 2021 Pilot's Watch",
+                name: 'Jwellery',
                 price: '₹650',
                 oldPrice: '₹1599',
                 image: 'https://via.placeholder.com/120',
@@ -361,7 +364,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   productImage: {
-    width: 100,
+    width: 200,
     height: 100,
     borderRadius: 10,
   },
