@@ -10,16 +10,17 @@ import {
   Dimensions,
 } from "react-native";
 import { captureRef } from "react-native-view-shot";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 import TfModel from "@/helpers/ml/TensorlfowModel";
+import { AntDesign } from "@expo/vector-icons";
 
 const { height } = Dimensions.get("window");
 export default function ScanNFind() {
-  const cameraRef = useRef(null);
   const [predict, setPredict] = useState("");
 
   // Camera Stuff & Permissions
+  const cameraRef = useRef(null);
   const [facing, setFacing] = useState<CameraType>("back"); // WHICH CAMERA TO USE
   const [permission, requestPermission] = useCameraPermissions();
 
@@ -76,10 +77,21 @@ export default function ScanNFind() {
         <AntDesign name="left" size={24} color="black" />
       </TouchableOpacity>
       <CameraView style={styles.camera} facing={facing} zoom={0}></CameraView>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={captureImage}>
-          <AntDesign name="camera" size={48} color="black" />
-        </TouchableOpacity>
+      <View style={styles.bottomsContainer}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={captureImage}>
+            <Ionicons name="image" size={32} color="grey" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, styles.centreButton]}
+            onPress={captureImage}
+          >
+            <Ionicons name="camera" size={52} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+            <Ionicons name="camera-reverse" size={32} color="grey" />
+          </TouchableOpacity>
+        </View>
 
         {predict === "" ? <Text>....loading</Text> : <Text>{predict}</Text>}
       </View>
@@ -89,10 +101,8 @@ export default function ScanNFind() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     backgroundColor: "black",
     position: "relative",
-    // justifyContent: "center",
   },
   backButton: {
     position: "absolute",
@@ -113,7 +123,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   camera: {
-    // flex: 4,
     width: "100%",
     height: height * 0.8,
     borderBottomLeftRadius: 12,
@@ -121,34 +130,40 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
   },
-  buttonContainer: {
-    // flex: 1,
+  bottomsContainer: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-
-    // flex: 1,
     height: height * 0.2,
-    // justifyContent: "flex-end",
     alignItems: "center",
-    paddingBottom: 20,
+    justifyContent: "center",
     backgroundColor: "white",
   },
+  buttonContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "space-around",
+  },
   button: {
-    flex: 1,
-    // alignSelf: "flex-end",
-    // borderRadius: 50,
-    // borderColor: "black",
+    padding: 10,
+
     justifyContent: "center",
     alignItems: "center",
+  },
+  centreButton: {
+    borderWidth: 2,
+    borderColor: "black",
+    borderRadius: 50,
   },
   text: {
     fontSize: 24,
     fontWeight: "bold",
     color: "white",
   },
-  image: {
-    width: 50, // Adjust as needed
-    height: 50,
-    resizeMode: "contain",
-  },
+  // image: {
+  //   width: 50, // Adjust as needed
+  //   height: 50,
+  //   resizeMode: "contain",
+  // },
 });
+``;
