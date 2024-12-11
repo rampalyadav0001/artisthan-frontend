@@ -1,17 +1,24 @@
-import { Text, View } from '@/components/Themed';
-import { StyleSheet } from 'react-native';
+import { Text, View } from "@/components/Themed";
+import { StyleSheet } from "react-native";
 
-import React from 'react';
+import React from "react";
 
 
 export default function index() {
+  const products = [
+    {
+      id: 0,
+      name: "Product 1",
+      price: 100,
+    },
+  ];
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Cart page</Text>
       <View
         style={styles.separator}
-        lightColor='#eee'
-        darkColor='rgba(255,255,255,0.1)'
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
       />
       
     </View>
@@ -21,16 +28,16 @@ export default function index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: "80%",
   },
 });
