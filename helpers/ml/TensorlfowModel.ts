@@ -20,8 +20,6 @@ const TfModel = async (picture: string) => {
     const imgBuffer = tf.util.encodeString(imgB64, "base64").buffer;
     // console.log("imgBuffer", imgBuffer);
 
-    // const response = await fetch(filePath, {}, { isBinary: true });
-    // const imageDataArrayBuffer = await response.arrayBuffer();
     const imageData = new Uint8Array(imgBuffer);
     const imageTensor = decodeJpeg(imageData);
     const prediction = await model.classify(imageTensor);
