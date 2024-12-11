@@ -14,27 +14,27 @@ const mainFestivals = [
   {
     id: 1,
     name: "Diwali",
-    imageSource: "https://via.placeholder.com/150",
+    imageSource: { uri: "https://via.placeholder.com/150" },
   },
   {
     id: 2,
     name: "Holi",
-    imageSource: "https://via.placeholder.com/150",
+    imageSource: { uri: "https://via.placeholder.com/150" },
   },
   {
     id: 3,
     name: "Navratri",
-    imageSource: "https://via.placeholder.com/150",
+    imageSource: { uri: "https://via.placeholder.com/150" },
   },
   {
     id: 4,
     name: "Eid",
-    imageSource: "https://via.placeholder.com/150",
+    imageSource: { uri: "https://via.placeholder.com/150" },
   },
   {
     id: 5,
     name: "Christmas",
-    imageSource: "https://via.placeholder.com/150",
+    imageSource: { uri: "https://via.placeholder.com/150" },
   },
 ];
 
@@ -43,17 +43,17 @@ const minorFestivals = [
   {
     id: 101,
     name: "Akshaya Tritiya",
-    imageSource: "https://via.placeholder.com/150",
+    imageSource: { uri: "https://via.placeholder.com/150" },
   },
   {
     id: 102,
     name: "Basant Panchami",
-    imageSource: "https://via.placeholder.com/150",
+    imageSource: { uri: "https://via.placeholder.com/150" },
   },
   {
     id: 103,
     name: "Mahashivratri",
-    imageSource: "https://via.placeholder.com/150",
+    imageSource: { uri: "https://via.placeholder.com/150" },
   },
 ];
 

@@ -9,19 +9,19 @@ export const data: Data[] = [
   {
     id: 1,
     image: require("@/assets/images/image1.png"),
-    title: "Explore a world of Craftsmanship",
-    text: "From traditional handicrafts to modern design, discover the stories behind the Indian handicrafts.",
+    title: "Connect with your roots",
+    text: "Discover authentic Indian products directly from local artisans and sellers. Bridge the distance between your memories and your homeland.",
   },
   {
     id: 2,
     image: require("@/assets/images/image2.png"),
-    title: "Empowering Artisans, Preserve Traditions",
-    text: "Every Purchase supports skilled craftspeople and helps preserve India's rich heritage.",
+    title: "Bring India Closer",
+    text: "Explore unique handcrafted products, traditional attires, festive decorations, and cultural treasures – all verified and shipped directly to your doorstep.",
   },
   {
     id: 3,
     image: require("@/assets/images/image3.png"),
-    title: "Lorem Ipsum",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    title: "Your Cultural Connection",
+    text: "Support local artisans, preserve traditions, and stay connected to your heritage with just a few taps. Every purchase tells a story",
   },
 ];

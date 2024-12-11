@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
     color: theme.colors.textColor,
     textAlign: "center",
     lineHeight: 20,
+    fontSize: 16,
     marginHorizontal: 30,
   },
   footerContainer: {
