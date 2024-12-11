@@ -1,17 +1,17 @@
-import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Redirect, Tabs, useSegments } from "expo-router";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Redirect, Tabs, useSegments } from 'expo-router';
+import React from 'react';
 
-import Colors from "@/constants/Colors";
-import { useColorScheme } from "@/components/useColorScheme";
+import { useColorScheme } from '@/components/useColorScheme';
+import Colors from '@/constants/Colors';
 
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { useUserStore } from "@/store/userStrore";
+import { useUserStore } from '@/store/userStrore';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
+  name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;
 }) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
@@ -24,62 +24,62 @@ export default function TabLayout() {
   );
   const segment = useSegments();
   const page = segment[segment.length - 1];
-  const pagesToHideTabBar = ["ScanNFind"];
+  const pagesToHideTabBar = ['ScanNFind'];
   // const hasFinishOnboarding = false;
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
   if (!isLoggedIn) {
     if (!hasFinishOnboarding) {
-      return <Redirect href="/onboarding" />;
+      return <Redirect href='/onboarding' />;
     } else {
-      return <Redirect href="/(auth)/Login" />;
+      return <Redirect href='/(auth)/Login' />;
     }
   }
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: false,
         tabBarStyle: {
-          display: pagesToHideTabBar.includes(page) ? "none" : "flex",
+          display: pagesToHideTabBar.includes(page) ? 'none' : 'flex',
         },
       }}
     >
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
-          title: "Home",
+          title: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home" color={color} size={size} />
+            <MaterialIcons name='home' color={color} size={size} />
           ),
         }}
       />
       <Tabs.Screen
-        name="Search"
+        name='Search'
         options={{
-          title: "Search",
+          title: 'Search',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="search1" size={size} color={color} />
+            <AntDesign name='search1' size={size} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="Cart"
+        name='Cart'
         options={{
-          title: "Cart",
+          title: 'Cart',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="shoppingcart" color={color} size={size} />
+            <AntDesign name='shoppingcart' color={color} size={size} />
           ),
         }}
       />
       <Tabs.Screen
-        name="Profile"
+        name='Profile'
         options={{
-          title: "Profile",
+          title: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="user" color={color} size={size} />
+            <AntDesign name='user' color={color} size={size} />
           ),
         }}
       />

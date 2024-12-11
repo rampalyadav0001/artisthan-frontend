@@ -1,40 +1,39 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
-  View,
-  Text,
   Image,
-  StyleSheet,
-  TouchableOpacity,
   ScrollView,
-  ImageSourcePropType,
-} from "react-native";
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 // Festival Data
 const mainFestivals = [
   {
     id: 1,
-    name: "Diwali",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    name: 'Diwali',
+    imageSource: { uri: 'https://via.placeholder.com/150' },
   },
   {
     id: 2,
-    name: "Holi",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    name: 'Holi',
+    imageSource: { uri: 'https://via.placeholder.com/150' },
   },
   {
     id: 3,
-    name: "Navratri",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    name: 'Navratri',
+    imageSource: { uri: 'https://via.placeholder.com/150' },
   },
   {
     id: 4,
-    name: "Eid",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    name: 'Eid',
+    imageSource: { uri: 'https://via.placeholder.com/150' },
   },
   {
     id: 5,
-    name: "Christmas",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    name: 'Christmas',
+    imageSource: { uri: 'https://via.placeholder.com/150' },
   },
 ];
 
@@ -42,18 +41,18 @@ const mainFestivals = [
 const minorFestivals = [
   {
     id: 101,
-    name: "Akshaya Tritiya",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    name: 'Akshaya Tritiya',
+    imageSource: { uri: 'https://via.placeholder.com/150' },
   },
   {
     id: 102,
-    name: "Basant Panchami",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    name: 'Basant Panchami',
+    imageSource: { uri: 'https://via.placeholder.com/150' },
   },
   {
     id: 103,
-    name: "Mahashivratri",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    name: 'Mahashivratri',
+    imageSource: { uri: 'https://via.placeholder.com/150' },
   },
 ];
 
@@ -97,13 +96,13 @@ const CircularFestivalList: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     padding: 10,
   },
   festivalContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     margin: 10,
   },
   festivalImage: {
@@ -111,13 +110,13 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     borderWidth: 2,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
   },
   festivalName: {
     marginTop: 5,
     fontSize: 14,
-    fontWeight: "500",
-    textAlign: "center",
+    fontWeight: '500',
+    textAlign: 'center',
   },
 });
 
