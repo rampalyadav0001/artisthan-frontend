@@ -1,7 +1,16 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, TouchableOpacity, Alert, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { useUserStore } from "@/store/userStrore";
+import { theme } from "@/theme";
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -34,7 +43,10 @@ const LoginScreen = () => {
         login(); // Assuming `login` saves user details
         router.replace("/"); // Navigate to the main screen
       } else {
-        Alert.alert("Login Failed", data.message || "Invalid email or password.");
+        Alert.alert(
+          "Login Failed",
+          data.message || "Invalid email or password."
+        );
       }
     } catch (error) {
       Alert.alert("Error", "Something went wrong. Please try again later.");
@@ -72,8 +84,14 @@ const LoginScreen = () => {
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Log In</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.linkContainer} onPress={() => router.push("/Registration")}>
-            <Text style={styles.linkText}>Don't have an account? <Text style={styles.linkHighlight}>Register</Text></Text>
+          <TouchableOpacity
+            style={styles.linkContainer}
+            onPress={() => router.push("/Registration")}
+          >
+            <Text style={styles.linkText}>
+              Don't have an account?{" "}
+              <Text style={styles.linkHighlight}>Register</Text>
+            </Text>
           </TouchableOpacity>
         </>
       )}
@@ -84,7 +102,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff1c2",
+    backgroundColor: theme.colors.backgroundColor,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
@@ -151,6 +169,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
-
-
-

@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   View,
@@ -14,27 +15,27 @@ const mainFestivals = [
   {
     id: 1,
     name: "Diwali",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    imageSource: { uri: "https://i.ibb.co/FWRLvRK/diwali.png" },
   },
   {
     id: 2,
     name: "Holi",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    imageSource: { uri: "https://i.ibb.co/dr5YfJQ/holi.png" },
   },
   {
     id: 3,
     name: "Navratri",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    imageSource: { uri: "https://i.ibb.co/YLTHKyP/navratri.png" },
   },
   {
     id: 4,
     name: "Eid",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    imageSource: { uri: "https://i.ibb.co/ZTdT292/eid.png" },
   },
   {
     id: 5,
     name: "Christmas",
-    imageSource: { uri: "https://via.placeholder.com/150" },
+    imageSource: { uri: "https://i.ibb.co/PDYtc7n/christmas.png" },
   },
 ];
 
@@ -60,7 +61,10 @@ const minorFestivals = [
 const CircularFestivalList: React.FC = () => {
   const [festivals, setFestivals] = useState(mainFestivals);
   const [minorFestivalsAdded, setMinorFestivalsAdded] = useState(false);
-
+  const router = useRouter();
+  const handleNextScreen = () => {
+    router.replace("/");
+  };
   const handlePress = (index: number) => {
     if (!minorFestivalsAdded) {
       // Insert minor festivals after the clicked index
@@ -91,12 +95,16 @@ const CircularFestivalList: React.FC = () => {
           </View>
         </TouchableOpacity>
       ))}
+      <TouchableOpacity style={styles.nextButton} onPress={handleNextScreen}>
+        <Text> Next </Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
@@ -118,6 +126,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "500",
     textAlign: "center",
+  },
+  nextButton: {
+    position: "absolute",
+    backgroundColor: "lightblue",
+    padding: 10,
+    borderRadius: 5,
+    bottom: 10,
+    margin: 10,
+    right: 10,
   },
 });
 

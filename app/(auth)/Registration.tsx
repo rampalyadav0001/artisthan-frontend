@@ -1,4 +1,5 @@
 import { useUserStore } from "@/store/userStrore";
+import { theme } from "@/theme";
 import { useRouter } from "expo-router";
 import { navigate } from "expo-router/build/global-state/routing";
 import React, { useState } from "react";
@@ -11,6 +12,7 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -18,10 +20,18 @@ const Registration = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  // const [partOfIndia, setPartOfIndia] = useState("north");
+  // const [religion, setReligion] = useState("hindu");
   const router = useRouter();
   const login = useUserStore((state) => state.login);
+  const userRegion = useUserStore((state) => state.userRegion);
+  const userReligion = useUserStore((state) => state.userReligion);
+  const setUserRegion = useUserStore((state) => state.setUserRegion);
+  const setUserReligion = useUserStore((state) => state.setUserReligion);
 
   const handleRegister = () => {
+    // const userRegion = useUserStore((state) => state.userRegion);
+    // const userReligion = useUserStore((state) => state.userReligion);
     if (!name || !username || !email || !phone || !password) {
       Alert.alert("Error", "All fields are required!");
       return;
@@ -34,7 +44,6 @@ const Registration = () => {
 
     login();
     // Navigate to login or home screen
-    router.replace("/SelectInterests");
   };
 
   return (
@@ -85,6 +94,35 @@ const Registration = () => {
           onChangeText={setPassword}
         />
 
+        <Text style={styles.dropdownLabel}>Part of India</Text>
+        <View style={styles.dropdownContainer}>
+          <Picker
+            selectedValue={userRegion}
+            onValueChange={(value) => setUserRegion(value)}
+            style={styles.picker}
+          >
+            <Picker.Item label="North" value="north" />
+            <Picker.Item label="South" value="south" />
+            <Picker.Item label="East" value="east" />
+            <Picker.Item label="West" value="west" />
+          </Picker>
+        </View>
+
+        <Text style={styles.dropdownLabel}>Religion</Text>
+        <View style={styles.dropdownContainer}>
+          <Picker
+            selectedValue={userReligion}
+            onValueChange={(value) => setUserReligion(value)}
+            style={styles.picker}
+          >
+            <Picker.Item label="Hindu" value="hindu" />
+            <Picker.Item label="Muslim" value="muslim" />
+            <Picker.Item label="Christian" value="christian" />
+            <Picker.Item label="Sikh" value="sikh" />
+            <Picker.Item label="Other" value="other" />
+          </Picker>
+        </View>
+
         <TouchableOpacity
           style={styles.registerButton}
           onPress={handleRegister}
@@ -105,12 +143,12 @@ const Registration = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff1c2",
+    backgroundColor: theme.colors.backgroundColor,
     padding: 20,
     justifyContent: "center",
   },
   title: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: "bold",
     color: "#333",
     textAlign: "center",
@@ -135,6 +173,27 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  dropdownLabel: {
+    fontSize: 16,
+    color: "#666",
+    marginBottom: 5,
+  },
+  dropdownContainer: {
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    marginBottom: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  picker: {
+    height: 50,
+    width: "100%",
   },
   registerButton: {
     backgroundColor: "#E60B15",
