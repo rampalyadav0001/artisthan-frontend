@@ -1,5 +1,5 @@
-import { useUserStore } from '@/store/userStrore';
 import { artisans } from '@/data/productData';
+import { useUserStore } from '@/store/userStore';
 import React from 'react';
 import {
   Image,
@@ -14,7 +14,10 @@ const ArtisianDetailsPage = () => {
   const productId = useUserStore((state) => state.productId);
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={{ uri: artisans[productId].image }} style={styles.artisanImage} />
+      <Image
+        source={{ uri: artisans[productId].image }}
+        style={styles.artisanImage}
+      />
       <Text style={styles.artisanName}>{artisans[productId].name}</Text>
       <Text style={styles.artisanDesc}>{artisans[productId].desc}</Text>
 

@@ -5,7 +5,7 @@ import React from 'react';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
 
-import { useUserStore } from '@/store/userStrore';
+import { useUserStore } from '@/store/userStore';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
@@ -31,7 +31,7 @@ export default function TabLayout() {
     if (!hasFinishOnboarding) {
       return <Redirect href='/onboarding' />;
     } else {
-      return <Redirect href='/(auth)/Login' />;
+      return <Redirect href='/(auth)/Auth' />;
     }
   }
 

@@ -1,4 +1,4 @@
-import { useUserStore } from '@/store/userStrore';
+import { useUserStore } from '@/store/userStore';
 import React from 'react';
 import { Text, View } from 'react-native';
 

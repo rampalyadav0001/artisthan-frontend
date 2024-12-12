@@ -1,14 +1,19 @@
+import { regionData } from '@/data/RecommenderSystemData';
+import { useUserStore } from '@/store/userStore';
+import React from 'react';
 import {
-  View,
-  Text,
   Image,
-  TouchableOpacity,
   ScrollView,
   StyleSheet,
-} from "react-native";
-import React from "react";
-
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 const RecommendedProducts = () => {
+  const userRegion = useUserStore((state) => state.userRegion);
+  console.log(userRegion);
+  console.log(regionData.filter((item) => item.region === userRegion));
+
   return (
     <View style={styles.dealSection}>
       <View style={styles.dealHeader}>
@@ -23,26 +28,18 @@ const RecommendedProducts = () => {
         showsHorizontalScrollIndicator={false}
         style={styles.dealProducts}
       >
-        {[
-          {
-            name: "Royal Rajasthani Necklace",
-            price: "₹500000",
-            image:
-              "https://assets5.mirraw.com/images/66043/507641bb18099aa0c3cca1f6acf2cdc7_zoom.jpg?1364577730",
-          },
-          {
-            name: "Kanjivaram Saree",
-            price: "₹2499",
-            image:
-              "https://sp.yimg.com/ib/th?id=OIP.vFj8FO6x97B6rakaDfgYHgHaDS&pid=Api&w=148&h=148&c=7&dpr=2&rs=1",
-          },
-        ].map((item, index) => (
-          <View key={index} style={styles.productCard}>
-            <Image source={{ uri: item.image }} style={styles.productImage} />
-            <Text style={styles.productName}>{item.name}</Text>
-            <Text style={styles.productPrice}>{item.price}</Text>
-          </View>
-        ))}
+        {regionData
+          .filter((item) => item.region === userRegion)[0]
+          .products.map((item, index) => (
+            <View key={index} style={styles.productCard}>
+              <Image
+                source={{ uri: item.imageUrl }}
+                style={styles.productImage}
+              />
+              <Text style={styles.productName}>{item.name}</Text>
+              <Text style={styles.productPrice}>{item.price}</Text>
+            </View>
+          ))}
       </ScrollView>
     </View>
   );
@@ -54,32 +51,32 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   dealHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   dealTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   timer: {
-    color: "#E63946",
+    color: '#E63946',
   },
   viewAll: {
-    color: "#007BFF",
-    fontWeight: "bold",
+    color: '#007BFF',
+    fontWeight: 'bold',
   },
   dealProducts: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 10,
   },
   productCard: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderRadius: 10,
     marginRight: 10,
     padding: 10,
-    alignItems: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
@@ -87,12 +84,12 @@ const styles = StyleSheet.create({
   },
   productName: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 5,
-    textAlign: "center",
+    textAlign: 'center',
   },
   productPrice: {
-    color: "#E63946",
+    color: '#E63946',
     marginTop: 5,
   },
   productImage: {

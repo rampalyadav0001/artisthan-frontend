@@ -1,5 +1,5 @@
 import { Text, View } from '@/components/Themed';
-import { useUserStore } from '@/store/userStrore';
+import { useUserStore } from '@/store/userStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import React from 'react';

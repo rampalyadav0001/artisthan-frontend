@@ -1,7 +1,8 @@
-import { useUserStore } from "@/store/userStrore";
-import { useRouter } from "expo-router";
-import { navigate } from "expo-router/build/global-state/routing";
-import React, { useState } from "react";
+import { useUserStore } from '@/store/userStore';
+import { theme } from '@/theme';
+import { Picker } from '@react-native-picker/picker';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
 import {
   Alert,
   ScrollView,
@@ -9,17 +10,16 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+  View,
+} from 'react-native';
 
 const Registration = () => {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+
   const router = useRouter();
   const login = useUserStore((state) => state.login);
   const userRegion = useUserStore((state) => state.userRegion);
@@ -28,8 +28,6 @@ const Registration = () => {
   const setUserReligion = useUserStore((state) => state.setUserReligion);
 
   const handleRegister = () => {
-    // const userRegion = useUserStore((state) => state.userRegion);
-    // const userReligion = useUserStore((state) => state.userReligion);
     if (!name || !username || !email || !phone || !password) {
       Alert.alert('Error', 'All fields are required!');
       return;
@@ -41,8 +39,13 @@ const Registration = () => {
     Alert.alert('Success', 'Registration completed!');
 
     login();
+    router.replace('/');
     // Navigate to login or home screen
-    router.replace("/SelectInterests");
+  };
+
+  const handleUserRegion = (value: string) => {
+    console.log(value, 'value');
+    setUserRegion(value);
   };
 
   return (
@@ -97,13 +100,13 @@ const Registration = () => {
         <View style={styles.dropdownContainer}>
           <Picker
             selectedValue={userRegion}
-            onValueChange={(value) => setUserRegion(value)}
+            onValueChange={handleUserRegion}
             style={styles.picker}
           >
-            <Picker.Item label="North" value="north" />
-            <Picker.Item label="South" value="south" />
-            <Picker.Item label="East" value="east" />
-            <Picker.Item label="West" value="west" />
+            <Picker.Item label='North' value='north' />
+            <Picker.Item label='South' value='south' />
+            <Picker.Item label='East' value='east' />
+            <Picker.Item label='West' value='west' />
           </Picker>
         </View>
 
@@ -114,11 +117,11 @@ const Registration = () => {
             onValueChange={(value) => setUserReligion(value)}
             style={styles.picker}
           >
-            <Picker.Item label="Hindu" value="hindu" />
-            <Picker.Item label="Muslim" value="muslim" />
-            <Picker.Item label="Christian" value="christian" />
-            <Picker.Item label="Sikh" value="sikh" />
-            <Picker.Item label="Other" value="other" />
+            <Picker.Item label='Hindu' value='hindu' />
+            <Picker.Item label='Muslim' value='muslim' />
+            <Picker.Item label='Christian' value='christian' />
+            <Picker.Item label='Sikh' value='sikh' />
+            <Picker.Item label='Other' value='other' />
           </Picker>
         </View>
 
@@ -142,15 +145,15 @@ const Registration = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff1c2",
+    backgroundColor: theme.colors.backgroundColor,
     padding: 20,
     justifyContent: 'center',
   },
   title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#333",
-    textAlign: "center",
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
     marginBottom: 10,
   },
   subtitle: {
@@ -175,16 +178,16 @@ const styles = StyleSheet.create({
   },
   dropdownLabel: {
     fontSize: 16,
-    color: "#666",
+    color: '#666',
     marginBottom: 5,
   },
   dropdownContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 8,
     marginBottom: 15,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
@@ -192,7 +195,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     height: 50,
-    width: "100%",
+    width: '100%',
   },
   registerButton: {
     backgroundColor: '#E60B15',

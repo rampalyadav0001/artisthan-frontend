@@ -1,27 +1,27 @@
-import { Link, Stack } from "expo-router";
-import React from "react";
+import { Stack } from 'expo-router';
+import React from 'react';
 
 export default function Layout() {
   return (
     <Stack>
       <Stack.Screen
-        name="Login"
+        name='Auth'
         options={{
-          title: "Login",
+          title: 'Auth',
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="Registration"
+        name='Login'
         options={{
-          title: "Registration",
+          title: 'Login',
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="SelectInterests"
+        name='Registration'
         options={{
-          title: "Interests",
+          title: 'Registration',
           headerShown: false,
         }}
       />

@@ -1,5 +1,7 @@
-import { Products, TrendingProducts, artisans } from '@/data/productData';
-import { useUserStore } from '@/store/userStrore';
+import RecommendedProducts from '@/components/RecommendedProducts';
+import TrendingProducts from '@/components/TrendingProducts';
+import { artisans } from '@/data/productData';
+import { useUserStore } from '@/store/userStore';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -98,70 +100,10 @@ const HomePage = () => {
         </View>
 
         {/* Recommended Products */}
-        <View style={styles.dealSection}>
-          <View style={styles.dealHeader}>
-            <Text style={styles.dealTitle}>Recommended Products</Text>
-
-            <TouchableOpacity>
-              <Text style={styles.viewAll}>View all</Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.dealProducts}
-          >
-            {Products.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.productCard}
-                onPress={() => openProductsPage(index)}
-              >
-                <Image
-                  source={{ uri: item.image }}
-                  style={styles.productImage}
-                />
-                <Text style={styles.productName}>{item.name}</Text>
-                <Text style={styles.productPrice}>{item.price}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
+        <RecommendedProducts />
 
         {/* Trending Products */}
-        <View style={styles.trendingSection}>
-          <View style={styles.trendingHeader}>
-            <Text style={styles.trendingTitle}>Trending Products</Text>
-            <TouchableOpacity>
-              <Text style={styles.viewAll}>View all</Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.trendingProducts}
-          >
-            {TrendingProducts.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.productCard}
-                onPress={() => openTrendingProductsPage(index)}
-              >
-                <Image
-                  source={{ uri: item.image }}
-                  style={styles.productImage}
-                />
-                <Text style={styles.productName}>{item.name}</Text>
-                <Text style={styles.productPrice}>
-                  {item.price}{' '}
-                  <Text
-                    style={styles.oldPrice}
-                  >{`(${item.oldPrice} off)`}</Text>
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
+        <TrendingProducts />
 
         {/* Festival Big Sale */}
         <View style={styles.saleBanner}>
@@ -183,7 +125,9 @@ const HomePage = () => {
         {/* Hot Deals */}
         <View style={styles.hotDeals}>
           <Image
-            source={{ uri: 'https://tse3.mm.bing.net/th?id=OIP.x5I2H2ZxyWcsHGmpxn9jFwHaE8&pid=Api&P=0&h=180' }} // Replace with Hot Deals Image
+            source={{
+              uri: 'https://tse3.mm.bing.net/th?id=OIP.x5I2H2ZxyWcsHGmpxn9jFwHaE8&pid=Api&P=0&h=180',
+            }} // Replace with Hot Deals Image
             style={styles.hotDealsImage}
           />
         </View>
@@ -331,7 +275,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
     elevation: 3,
-
   },
   productImage: {
     width: 200,

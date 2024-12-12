@@ -1,11 +1,17 @@
 import { TrendingProducts } from '@/data/productData';
-import { useUserStore } from '@/store/userStrore';
+import { useUserStore } from '@/store/userStore';
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const TrendingProductDetails = () => {
   const productId = useUserStore((state) => state.productId);
-  console.log('Product :', TrendingProducts[productId]);
 
   const handleAddToCart = () => {
     console.log(`${TrendingProducts[productId].name} added to cart`);
@@ -27,7 +33,10 @@ const TrendingProductDetails = () => {
         </Text>
       </View>
       <Text style={styles.productDesc}>{TrendingProducts[productId].desc}</Text>
-      <TouchableOpacity style={styles.addToCartButton} onPress={handleAddToCart}>
+      <TouchableOpacity
+        style={styles.addToCartButton}
+        onPress={handleAddToCart}
+      >
         <Text style={styles.addToCartText}>Add to Cart</Text>
       </TouchableOpacity>
     </ScrollView>

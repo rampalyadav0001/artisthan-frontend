@@ -1,16 +1,16 @@
-import { Feather } from "@expo/vector-icons";
-import React, { RefObject } from "react";
-import { FlatList, Pressable, StyleSheet } from "react-native";
+import { Feather } from '@expo/vector-icons';
+import React, { RefObject } from 'react';
+import { FlatList, Pressable, StyleSheet } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
   withSpring,
   withTiming,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
-import { theme } from "@/theme";
-import { useRouter } from "expo-router";
-import { useUserStore } from "@/store/userStrore";
+import { useUserStore } from '@/store/userStore';
+import { theme } from '@/theme';
+import { useRouter } from 'expo-router';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -60,7 +60,7 @@ export function Button({
   const handleNextScreen = () => {
     const handlePress = () => {
       toggleHadOnboarding();
-      router.replace("/");
+      router.replace('/');
     };
     const isLastScreen = flatListIndex.value === dataLength - 1;
     if (!isLastScreen) {
@@ -82,7 +82,7 @@ export function Button({
 
       <Animated.View style={[styles.arrow, arrowAnimationStyle]}>
         <Feather
-          name="arrow-right"
+          name='arrow-right'
           size={30}
           color={theme.colors.textHighlightColor}
         />
@@ -96,17 +96,17 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.backgroundHighlightColor,
     padding: 10,
     borderRadius: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
   arrow: {
-    position: "absolute",
+    position: 'absolute',
   },
   text: {
-    position: "absolute",
+    position: 'absolute',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: theme.colors.textHighlightColor,
   },
 });
