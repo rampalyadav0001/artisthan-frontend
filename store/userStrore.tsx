@@ -6,6 +6,8 @@ type UserStore = {
   hasFinishedOnboarding: boolean;
   isLoggedIn: boolean;
   toggleHadOnboarding: () => void;
+  productId:number;
+  setProductId:(id:number)=>void; 
   login: () => void;
   logout: () => void;
 };
@@ -24,9 +26,12 @@ export const useUserStore = create(
           hasFinishedOnboarding: !state.hasFinishedOnboarding,
         })),
 
+
       login: () => set((state) => ({ ...state, isLoggedIn: true })),
 
       logout: () => set((state) => ({ ...state, isLoggedIn: false })),
+      productId:0,
+      setProductId:(id:number)=>set((state)=>({...state,productId:id})),
     }),
     {
       name: "artisthan-user-store",
